@@ -47,13 +47,19 @@ const contactForm = {
         contactNumberField.appendChild(contactNumberLabel);
         contactNumberField.appendChild(contactNumberInput);
 
+        let contactSaveButton = document.createElement("button");
+        contactSaveButton.textContent = "Save New Contact"
+        contactSaveButton.setAttribute("class", "contactSave")
 
+        contactSaveButton.addEventListener("click", this.handleNewContact)
+        console.log(contactSaveButton);
 
         let contactFormFragment = document.createDocumentFragment()
         contactFormFragment.appendChild(formHeader);
         contactFormFragment.appendChild(contactNameField);
         contactFormFragment.appendChild(contactAddressField);
         contactFormFragment.appendChild(contactNumberField);
+        contactFormFragment.appendChild(contactSaveButton);
         
         let formArticle = document.querySelector(".output");
         formArticle.appendChild(contactFormFragment)
