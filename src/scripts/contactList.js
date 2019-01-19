@@ -9,14 +9,29 @@
 import contactCollection from "./contactCollection"
 import contact from "./contact"
 
+
 const contactList = {
     getAndAppendContacts() {
+        
         contactCollection.getAllContacts()
         .then(aBunchofContacts => {
             console.log(aBunchofContacts)
+            
+            let largeDocFrag = document.createDocumentFragment()
+            
+            // take the array in aBunchOfContacts, and call a function from contact.js to create DOM elements for each object
             aBunchofContacts.forEach(eachContact => {
-                contact.makeDOMcomponentFromObject(eachContact)
+                let contactHtml = contact.makeDOMcomponentFromObject(eachContact)
+                console.log(contactHtml)
+                // put small document fragment into bigger document fragment
+                largeDocFrag.appendChild(contactHtml)
+                
             })
+            // see what's in the boc
+            console.log(largeDocFrag)
+            // Get a reference to the DOM with querySelector and then appear the BIG BOX to the output element
+            const displayContainer = document.querySelector(".output")
+            displayContainer.appendChild(largeDocFrag)
         })
     }
 }

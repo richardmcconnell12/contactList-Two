@@ -4,10 +4,9 @@
 
 const contact = {
     makeDOMcomponentFromObject(contactObject) {
-        console.log(contactObject)
         // return  document fragment with the info from the contactObject that got passed in to this function
 
-        let contactArticle = document.createElement ("article");
+        let contactDocFrag = document.createDocumentFragment()
 
         let contactName = document.createElement ("h3");
         contactName.textContent = contactObject.name
@@ -18,11 +17,11 @@ const contact = {
         let contactNumber = document.createElement ("p");
         contactNumber.textContent = contactObject.number
 
-        contactArticle.appendChild(contactName);
-        contactArticle.appendChild(contactAddress);
-        contactArticle.appendChild(contactNumber)
+        contactDocFrag.appendChild(contactName);
+        contactDocFrag.appendChild(contactAddress);
+        contactDocFrag.appendChild(contactNumber)
 
-        return contactArticle
+        return contactDocFrag
 
 
     }

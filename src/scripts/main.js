@@ -5,5 +5,7 @@
 //Imports contactForm and ContactList
 
 import contactList from "./contactList";
+import contactForm from "./contactForm"
 
 contactList.getAndAppendContacts();
+contactForm.createAndAppendForm();
