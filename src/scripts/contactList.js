@@ -30,6 +30,7 @@ const contactList = {
             })
             // Get a reference to the DOM with querySelector and then appear the BIG BOX to the output element
             let displayContainer = document.querySelector(".output")
+            // Allows new contact to be posted without reiterating all contacts again
             while (displayContainer.firstChild) {
                 displayContainer.removeChild(displayContainer.firstChild);
             }

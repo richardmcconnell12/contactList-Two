@@ -23,6 +23,15 @@ const contactCollection = {
                     },
                     body: JSON.stringify(newContactToSave)
             })
+    },
+
+    deleteContact(contactsId) {
+            return fetch (`http://localhost:8088/contacts/${contactsId}`, {
+                    method: "DELETE",
+                    headers: {
+                            "Content-Type": "applcation/json"
+                    }
+            })
     }
 }
 export default contactCollection

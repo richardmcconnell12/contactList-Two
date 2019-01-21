@@ -1,3 +1,6 @@
+import contactCollection from "./contactCollection";
+import contactList from "./contactList"
+
 // This module contains a template that creates contact HTML components so the contactList can append them to DOM
 
 // Definitely has a function
@@ -35,9 +38,22 @@ const contact = {
         contactNumber.textContent += " "
         contactNumber.textContent += contactObject.number
 
+        // Create delete button
+        let deleteContactButton = document.createElement("button")
+        deleteContactButton.textContent = "Delete Contact"
+        deleteContactButton.setAttribute("id", `contacts--${contactObject.Id}`)
+        deleteContactButton.addEventListener("click", () => {
+            let contactId = contactObject.id
+            contactCollection.deleteContact(contactId)
+            .then(response => {
+                contactList.getAndAppendContacts()
+            })
+        })
+
         contactDocFrag.appendChild(contactName);
         contactDocFrag.appendChild(contactAddress);
         contactDocFrag.appendChild(contactNumber)
+        contactDocFrag.appendChild(deleteContactButton);
 
         return contactDocFrag
     }
