@@ -3,6 +3,7 @@
 // Listens for button click and sends user to database (contactCollection)
 
 import contactCollection from "./contactCollection"
+import contactList from "./contactList";
 
 const contactForm = {
     createAndAppendForm() {
@@ -52,7 +53,6 @@ const contactForm = {
         contactSaveButton.setAttribute("class", "contactSave")
 
         contactSaveButton.addEventListener("click", this.handleNewContact)
-        console.log(contactSaveButton);
 
         let contactFormFragment = document.createDocumentFragment()
         contactFormFragment.appendChild(formHeader);
@@ -60,24 +60,28 @@ const contactForm = {
         contactFormFragment.appendChild(contactAddressField);
         contactFormFragment.appendChild(contactNumberField);
         contactFormFragment.appendChild(contactSaveButton);
-        
-        let formArticle = document.querySelector(".output");
+
+        let formArticle = document.querySelector(".form");
         formArticle.appendChild(contactFormFragment)
     },
 
     handleNewContact(event) {
-        let inputContactName = document.querySelector("#contactName");
-        let inputContactAddress = document.querySelector("#contactAddress");
-        let inputContactNumber = document.querySelector("#contactNumber");
+        let inputContactName = document.querySelector("#contactName").value;
+        let inputContactAddress = document.querySelector("#contactAddress").value;
+        let inputContactNumber = document.querySelector("#contactNumber").value;
 
         let newContact = {
             name: inputContactName,
             address: inputContactAddress,
             number: inputContactNumber
         }
-
         contactCollection.postNewContact(newContact)
+        .then(response => {
+        contactList.getAndAppendContacts()
+        })
     }
 }
 
 export default contactForm
+
+
