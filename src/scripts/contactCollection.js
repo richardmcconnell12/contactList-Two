@@ -32,6 +32,21 @@ const contactCollection = {
                             "Content-Type": "applcation/json"
                     }
             })
+    },
+
+    getContact(contactsId) {
+        return fetch (`http://localhost:8088/contacts/${contactsId}`)
+        .then(response => response.json())
+    },
+
+    putExistingContacts(contactsId, contactsToEdit) {
+            return fetch (`http://localhost:8088/contacts/${contactsId.id}`, {
+                    method: "PUT",
+                    headers: {
+                            "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(contactsToEdit)
+            })
     }
 }
 export default contactCollection

@@ -1,5 +1,6 @@
 import contactCollection from "./contactCollection";
 import contactList from "./contactList"
+import contactEditForm from "./contactEditForm"
 
 // This module contains a template that creates contact HTML components so the contactList can append them to DOM
 
@@ -38,13 +39,29 @@ const contact = {
         contactNumber.textContent += " "
         contactNumber.textContent += contactObject.number
 
+        // Create edit button
+        let editContactButton = document.createElement("button");
+        editContactButton.textContent = "Edit Contact"
+        editContactButton.setAttribute("id", `contacts--${contactObject.id}`)
+        editContactButton.addEventListener("click", () => {
+            let articleId = event.target.id
+            console.log(articleId)
+            let contactId = articleId.split("--")[1]
+            contactCollection.getContact(contactId)
+            .then(response => {
+                console.log(response)
+                contactEditForm.createAndAppendForm(articleId.id, response)
+            })
+
+        })
+
         // Create delete button
         let deleteContactButton = document.createElement("button")
         deleteContactButton.textContent = "Delete Contact"
         deleteContactButton.setAttribute("id", `contacts--${contactObject.Id}`)
         deleteContactButton.addEventListener("click", () => {
-            let contactId = contactObject.id
-            contactCollection.deleteContact(contactId)
+            let contactsId = contactObject.id
+            contactCollection.deleteContact(contactsId)
             .then(response => {
                 contactList.getAndAppendContacts()
             })
@@ -52,7 +69,8 @@ const contact = {
 
         contactDocFrag.appendChild(contactName);
         contactDocFrag.appendChild(contactAddress);
-        contactDocFrag.appendChild(contactNumber)
+        contactDocFrag.appendChild(contactNumber);
+        contactDocFrag.appendChild(editContactButton);
         contactDocFrag.appendChild(deleteContactButton);
 
         return contactDocFrag
