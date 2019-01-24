@@ -2,7 +2,7 @@ import contactCollection from "./contactCollection"
 import contactList from "./contactList"
 
 const contactEditForm = {
-    createAndAppendForm(articleId, contactObjectToEdit) {
+    createAndAppendForm(contactId, contactObjectToEdit) {
 
         let contactEditNameField = document.createElement("fieldset");
 
@@ -20,7 +20,7 @@ const contactEditForm = {
         let contactEditAddressLabel = document.createElement("label");
         contactEditAddressLabel.textContent = "Address"
         let contactEditAddressInput = document.createElement("input");
-        contactEditNameInput.value = contactObjectToEdit.address
+        contactEditAddressInput.value = contactObjectToEdit.address
 
         contactEditAddressField.appendChild(contactEditAddressLabel);
         contactEditAddressField.appendChild(contactEditAddressInput);
@@ -45,7 +45,7 @@ const contactEditForm = {
                 number: contactEditNumberInput.value
             }
 
-            contactCollection.putExistingContacts(contactObjectToEdit, editedContact)
+            contactCollection.putExistingContacts(contactObjectToEdit.id, editedContact)
             .then(response => {
                 contactList.getAndAppendContacts(response)
             })

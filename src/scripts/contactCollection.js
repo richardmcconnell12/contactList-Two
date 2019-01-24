@@ -40,7 +40,8 @@ const contactCollection = {
     },
 
     putExistingContacts(contactsId, contactsToEdit) {
-            return fetch (`http://localhost:8088/contacts/${contactsId.id}`, {
+            console.log(contactsId)
+            return fetch (`http://localhost:8088/contacts/${contactsId}`, {
                     method: "PUT",
                     headers: {
                             "Content-Type": "application/json"
